@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProkesHoltrey_PersistenceFileStream.Models;
 
-namespace Demo_PersistenceFileStream
+namespace ProkesHoltrey_PersistenceFileStream
 {
     class Program
     {
