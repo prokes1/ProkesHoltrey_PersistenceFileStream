@@ -176,13 +176,35 @@ namespace ProkesHoltrey_PersistenceFileStream
                 }
             }
         }
+
         public void AddRecord()
         {
             //add a record here
         }
+
         public void DeleteRecord()
         {
             //delete a record here
+        }
+
+        public void DisplayAllRecords()
+        {
+
+        }
+
+        public void UpdateRecord()
+        {
+
+        }
+
+        public void ClearAllRecords()
+        {
+
+        }
+
+        public void Exit()
+        {
+
         }
     }
 }
