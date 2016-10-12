@@ -27,8 +27,6 @@ namespace ProkesHoltrey_PersistenceFileStream
             List<string> highScoresStringListRead = new List<string>(); ;
             List<HighScore> highScoresClassListRead = new List<HighScore>(); ;
 
-            string highScoreString;
-
             // initialize a list of HighScore objects
             highScoresClassListWrite = InitializeListOfHighScores();
 
@@ -63,7 +61,13 @@ namespace ProkesHoltrey_PersistenceFileStream
             highScoresClassList.Add(new HighScore() { PlayerName = "John", PlayerScore = 1296 });
             highScoresClassList.Add(new HighScore() { PlayerName = "Joan", PlayerScore = 345 });
             highScoresClassList.Add(new HighScore() { PlayerName = "Jeff", PlayerScore = 867 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Charlie", PlayerScore = 2309 });
+            highScoresClassList.Add(new HighScore() { PlayerName = "Joe", PlayerScore = 2309 });
+            highScoresClassList.Add(new HighScore() { PlayerName = "Jazz", PlayerScore = 239 });
+            highScoresClassList.Add(new HighScore() { PlayerName = "Reggie", PlayerScore = 2130 });
+            highScoresClassList.Add(new HighScore() { PlayerName = "Red", PlayerScore = 1209 });
+            highScoresClassList.Add(new HighScore() { PlayerName = "Charles", PlayerScore = 309 });
+            highScoresClassList.Add(new HighScore() { PlayerName = "Val", PlayerScore = 3289 });
+            highScoresClassList.Add(new HighScore() { PlayerName = "Billy", PlayerScore = 909 });
 
             return highScoresClassList;
         }
@@ -112,6 +116,73 @@ namespace ProkesHoltrey_PersistenceFileStream
             }
 
             return highScoresClassList;
+        }
+        public void DisplayIntroMenu()
+        {
+            bool usingMenu = true;
+
+            while (usingMenu)
+            {
+                Console.WriteLine("Menu");
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.WriteLine("1. Display All Records");
+                Console.WriteLine();
+                Console.WriteLine("2. Add a Record");
+                Console.WriteLine();
+                Console.WriteLine("3. Delete a Record");
+                Console.WriteLine();
+                Console.WriteLine("4. Update a Record");
+                Console.WriteLine();
+                Console.WriteLine("5. Clear all Records");
+                Console.WriteLine();
+                Console.WriteLine("6. Exit");
+
+                ConsoleKeyInfo userResponse = Console.ReadKey(true);
+                switch (userResponse.KeyChar)
+                {
+                    case '1':
+                        DisplayAllRecords();
+                        usingMenu = false;
+                        break;
+                    case '2':
+                        AddRecord();
+                        break;
+                    case '3':
+                        usingMenu = false;
+                        DeleteRecord();
+                        break;
+                    case '4':
+                        UpdateRecord();
+                        break;
+                    case '5':
+                        ClearAllRecords();
+                        break;
+                    case '6':
+                        Exit();
+                        break;
+                    default:
+                        Console.WriteLine("It appears you have selected an incorrect choice.");
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to continue or the ESC key to exit.");
+
+                        userResponse = Console.ReadKey(true);
+                        if (userResponse.Key == ConsoleKey.Escape)
+                        {
+                            usingMenu = false;
+                        }
+                        break;
+                }
+            }
+        }
+        public void AddRecord()
+        {
+
+        }
+        public void DeleteRecord()
+        {
+
         }
     }
 }
