@@ -203,7 +203,7 @@ namespace ProkesHoltrey_PersistenceFileStream
 
         public void DeleteRecord()
         {
-            //delete a record here
+            
         }
 
         public void DisplayAllRecords()
