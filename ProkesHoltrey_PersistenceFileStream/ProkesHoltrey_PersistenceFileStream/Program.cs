@@ -177,11 +177,12 @@ namespace ProkesHoltrey_PersistenceFileStream
             }
         }
 
-        public void AddRecord()
+        public HighScore AddRecord()
         {
+            HighScore tempScore;
             string userEntry = "";
             string playerName = "";
-            int score;
+            int score = 0;
             Console.Clear();
             Console.WriteLine("Add Record");
             Console.WriteLine();
@@ -195,9 +196,9 @@ namespace ProkesHoltrey_PersistenceFileStream
                 Console.Write("Score: ");
                 userEntry = Console.ReadLine();
                 convert = Int32.TryParse(userEntry, out score);
-
             }
-            highScoresClassList.Add(new HighScore() { PlayerName = playerName, PlayerScore = score });
+            tempScore = new HighScore() { PlayerName = playerName, PlayerScore = score };
+            return tempScore;
         }
 
         public void DeleteRecord()
