@@ -201,9 +201,9 @@ namespace ProkesHoltrey_PersistenceFileStream
             return tempScore;
         }
 
-        public void DeleteRecord()
+        public void DeleteRecord(string name)
         {
-            
+            HighScore tempHighScore
         }
 
         public void DisplayAllRecords()
