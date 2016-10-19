@@ -12,8 +12,8 @@ namespace ProkesHoltrey_PersistenceFileStream
     {
         static void Main(string[] args)
         {
-            string textFilePath = "Data\\Data.txt";
-
+            string textFilePath = "Data\\Highscores.txt";
+            DisplayIntroMenu();
             ObjectListReadWrite(textFilePath);
 
             Console.WriteLine("\nPress any key to exit.");
@@ -117,7 +117,7 @@ namespace ProkesHoltrey_PersistenceFileStream
 
             return highScoresClassList;
         }
-        public void DisplayIntroMenu()
+        static void DisplayIntroMenu()
         {
             bool usingMenu = true;
 
@@ -177,7 +177,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             }
         }
 
-        public HighScore AddRecord()
+        static HighScore AddRecord()
         {
             HighScore tempScore;
             string userEntry = "";
@@ -201,31 +201,33 @@ namespace ProkesHoltrey_PersistenceFileStream
             return tempScore;
         }
 
-        public void DeleteRecord(string name)
+        static void DeleteRecord()
         {
-            HighScore tempHighScore
+            HighScore tempHighScore;
         }
 
-        public void DisplayAllRecords()
+        static void DisplayAllRecords()
         {
-
+            
         }
 
-        public void UpdateRecord()
-        {
-
-        }
-
-        public void ClearAllRecords()
+        static void UpdateRecord()
         {
 
         }
 
-        public void Exit()
+        static void ClearAllRecords()
         {
+
+        }
+
+        static void Exit()
+        {
+            Console.Clear();
             Console.WriteLine("Dude, why you leaving?");
             Console.WriteLine("I guess you can press any key to leave.");
             Console.ReadKey();
+            Environment.Exit(1);
         }
     }
 }
