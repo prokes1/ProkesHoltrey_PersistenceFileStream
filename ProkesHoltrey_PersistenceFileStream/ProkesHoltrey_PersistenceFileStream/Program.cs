@@ -39,8 +39,8 @@ namespace ProkesHoltrey_PersistenceFileStream
 
             Console.WriteLine("The following high scores will be added to HighScores.txt.\n");
             // display list of high scores objects
-            DisplayHighScores(highScoresClassListWrite);
-
+            menu.DisplayHighScores(highScoresClassListWrite);
+            
             Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
             Console.ReadKey();
 
@@ -57,7 +57,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             highScoresClassListRead = ReadHighScoresFromTextFile(dataFile);
 
             // display list of high scores objects
-            DisplayHighScores(highScoresClassListRead);
+           menu.DisplayHighScores(highScoresClassListRead);
         }
 
         static List<HighScore> InitializeListOfHighScores()
@@ -79,13 +79,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             return highScoresClassList;
         }
 
-        static void DisplayHighScores(List<HighScore> highScoreClassList)
-        {
-            foreach (HighScore player in highScoreClassList)
-            {
-                Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
-            }
-        }
+        
 
         static void WriteHighScoresToTextFile(List<HighScore> highScoreClassLIst, string dataFile)
         {
@@ -130,6 +124,7 @@ namespace ProkesHoltrey_PersistenceFileStream
 
             while (usingMenu)
             {
+                Console.Clear();
                 Console.WriteLine("Menu");
                 Console.WriteLine();
                 Console.WriteLine();
@@ -150,15 +145,16 @@ namespace ProkesHoltrey_PersistenceFileStream
                 switch (userResponse.KeyChar)
                 {
                     case '1':
-                        menu.DisplayAllRecords();
-                        usingMenu = false;
+                        menu.DisplayHighScores(highScoreClassList);
+                        //usingMenu = false;
                         break;
                     case '2':
-                        menu.AddRecord();
+                        menu.AddRecord(highScoreClassList);
+                        //usingMenu = false;
                         break;
                     case '3':
-                        usingMenu = false;
-                        menu.DeleteRecord();
+                        menu.DeleteRecord(highScoreClassList);
+                        //usingMenu = false;
                         break;
                     case '4':
                         menu.UpdateRecord();

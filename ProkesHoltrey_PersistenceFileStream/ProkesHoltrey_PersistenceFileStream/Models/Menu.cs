@@ -8,7 +8,7 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
 {
     public class Menu
     {
-        public HighScore AddRecord()
+        public void AddRecord(List<HighScore> highScoreClassList)
         {
             HighScore tempScore;
             string userEntry = "";
@@ -29,16 +29,35 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
                 convert = Int32.TryParse(userEntry, out score);
             }
             tempScore = new HighScore() { PlayerName = playerName, PlayerScore = score };
-            return tempScore;
+            highScoreClassList.Add(tempScore);
         }
 
-        public void DeleteRecord()
+        public void DeleteRecord(List<HighScore> highScoreClassList)
         {
-            HighScore tempHighScore;
+            string userEntry = "";
+            string playerName = "";
+            Console.Clear();
+            Console.WriteLine("Delete Record");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Player Name: ");
+            userEntry = Console.ReadLine();
+            playerName = userEntry;
+            highScoreClassList.RemoveAll(item => item.PlayerName == playerName);
         }
 
-        public void DisplayAllRecords()
+        public void DisplayHighScores(List<HighScore> highScoreClassList)
         {
+            Console.Clear();
+            Console.WriteLine("Records");
+            
+
+            foreach (HighScore player in highScoreClassList)
+            {
+                Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
+            }
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
 
         }
 
