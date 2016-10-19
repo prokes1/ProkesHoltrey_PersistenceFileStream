@@ -12,9 +12,12 @@ namespace ProkesHoltrey_PersistenceFileStream
     {
         static void Main(string[] args)
         {
-            string textFilePath = "Data\\Highscores.txt";
-            DisplayIntroMenu();
-            ObjectListReadWrite(textFilePath);
+            //string textFilePath = "Data\\Data.txt";
+            string textFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            string file = textFilePath + @"\Data\HighScores.txt";
+
+            ObjectListReadWrite(file);
 
             Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
