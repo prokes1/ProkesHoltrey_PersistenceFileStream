@@ -30,7 +30,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             // initialize a list of HighScore objects
             highScoresClassListWrite = InitializeListOfHighScores();
 
-            Console.WriteLine("The following high scores will be added to Data.txt.\n");
+            Console.WriteLine("The following high scores will be added to HighScores.txt.\n");
             // display list of high scores objects
             DisplayHighScores(highScoresClassListWrite);
 
