@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\HighScore.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\ScoreHandling.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
