@@ -12,11 +12,13 @@ namespace ProkesHoltrey_PersistenceFileStream
     {
         static void Main(string[] args)
         {
+            List<HighScore> highScoreClassListWrite = new List<HighScore>();
+            
             //string textFilePath = "Data\\Data.txt";
             string textFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
             string file = textFilePath + @"\Data\HighScores.txt";
-
+            DisplayIntroMenu(highScoreClassListWrite);
             ObjectListReadWrite(file);
 
             Console.WriteLine("\nPress any key to exit.");
@@ -120,7 +122,7 @@ namespace ProkesHoltrey_PersistenceFileStream
 
             return highScoresClassList;
         }
-        static void DisplayIntroMenu()
+        static void DisplayIntroMenu(List<HighScore> highScoreClassList)
         {
             bool usingMenu = true;
 
@@ -194,7 +196,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             userEntry = Console.ReadLine();
             playerName = userEntry;
             bool convert = false;
-            while (convert)
+            while (!convert)
             {
                 Console.Write("Score: ");
                 userEntry = Console.ReadLine();
