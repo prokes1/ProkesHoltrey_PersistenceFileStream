@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProkesHoltrey_PersistenceFileStream.Models;
+using ProkesHoltrey_PersistenceFileStream;
 
 namespace ProkesHoltrey_PersistenceFileStream
 {
     class Program
     {
+        static Menu menu = new Menu();
         static void Main(string[] args)
         {
             List<HighScore> highScoreClassListWrite = new List<HighScore>();
@@ -148,21 +150,21 @@ namespace ProkesHoltrey_PersistenceFileStream
                 switch (userResponse.KeyChar)
                 {
                     case '1':
-                        DisplayAllRecords();
+                        menu.DisplayAllRecords();
                         usingMenu = false;
                         break;
                     case '2':
-                        AddRecord();
+                        menu.AddRecord();
                         break;
                     case '3':
                         usingMenu = false;
-                        DeleteRecord();
+                        menu.DeleteRecord();
                         break;
                     case '4':
-                        UpdateRecord();
+                        menu.UpdateRecord();
                         break;
                     case '5':
-                        ClearAllRecords();
+                        menu.ClearAllRecords();
                         break;
                     case '6':
                         Exit();
@@ -182,49 +184,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             }
         }
 
-        static HighScore AddRecord()
-        {
-            HighScore tempScore;
-            string userEntry = "";
-            string playerName = "";
-            int score = 0;
-            Console.Clear();
-            Console.WriteLine("Add Record");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.Write("Player Name: ");
-            userEntry = Console.ReadLine();
-            playerName = userEntry;
-            bool convert = false;
-            while (!convert)
-            {
-                Console.Write("Score: ");
-                userEntry = Console.ReadLine();
-                convert = Int32.TryParse(userEntry, out score);
-            }
-            tempScore = new HighScore() { PlayerName = playerName, PlayerScore = score };
-            return tempScore;
-        }
-
-        static void DeleteRecord()
-        {
-            HighScore tempHighScore;
-        }
-
-        static void DisplayAllRecords()
-        {
-            
-        }
-
-        static void UpdateRecord()
-        {
-
-        }
-
-        static void ClearAllRecords()
-        {
-
-        }
+        
 
         static void Exit()
         {
