@@ -103,7 +103,7 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             while (!convert)
             {
                 Console.WriteLine();
-                Console.WriteLine("Preivous High Score: " + previousScore);
+                Console.WriteLine("Previous High Score: " + previousScore);
                 Console.WriteLine();
                 Console.Write("New High Score: ");
                 userEntry = Console.ReadLine();
