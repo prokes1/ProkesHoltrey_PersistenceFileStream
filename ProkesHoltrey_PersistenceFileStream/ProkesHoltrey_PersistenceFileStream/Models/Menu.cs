@@ -8,6 +8,20 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
 {
     public class Menu
     {
+        public void DisplayContinuePrompt()
+        {
+            Console.CursorVisible = false;
+
+            Console.WriteLine();
+
+            Console.WriteLine("Press any key to continue.");
+            ConsoleKeyInfo response = Console.ReadKey();
+
+            Console.WriteLine();
+
+            Console.CursorVisible = true;
+        }
+
         public void AddRecord(List<HighScore> highScoreClassList)
         {
             HighScore tempScore;
@@ -24,12 +38,15 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             bool convert = false;
             while (!convert)
             {
+                Console.WriteLine();
                 Console.Write("Score: ");
                 userEntry = Console.ReadLine();
                 convert = Int32.TryParse(userEntry, out score);
             }
             tempScore = new HighScore() { PlayerName = playerName, PlayerScore = score };
             highScoreClassList.Add(tempScore);
+
+            DisplayContinuePrompt();
         }
 
         public void DeleteRecord(List<HighScore> highScoreClassList)
@@ -44,21 +61,22 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             userEntry = Console.ReadLine();
             playerName = userEntry;
             highScoreClassList.RemoveAll(item => item.PlayerName == playerName);
+
+            DisplayContinuePrompt();
         }
 
         public void DisplayHighScores(List<HighScore> highScoreClassList)
         {
             Console.Clear();
             Console.WriteLine("Records");
-            
+            Console.WriteLine();
 
             foreach (HighScore player in highScoreClassList)
             {
                 Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
             }
-            Console.WriteLine("Press Enter to continue...");
-            Console.ReadLine();
 
+            DisplayContinuePrompt();
         }
 
         public void UpdateRecord(List<HighScore> highScoreClassList)
@@ -84,7 +102,9 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             bool convert = false;
             while (!convert)
             {
+                Console.WriteLine();
                 Console.WriteLine("Preivous High Score: " + previousScore);
+                Console.WriteLine();
                 Console.Write("New High Score: ");
                 userEntry = Console.ReadLine();
                 convert = Int32.TryParse(userEntry, out score);
@@ -96,11 +116,19 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
                     }
                 }
             }
+
+            DisplayContinuePrompt();
         }
 
-        public void ClearAllRecords()
+        public void ClearAllRecords(List<HighScore> highScoreClassList)
         {
+            highScoreClassList.Clear();
+            Console.WriteLine();
+            Console.WriteLine();
 
+            Console.WriteLine("All records have been cleared.");
+
+            DisplayContinuePrompt();
         }
     }
 }

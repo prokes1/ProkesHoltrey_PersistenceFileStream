@@ -160,7 +160,7 @@ namespace ProkesHoltrey_PersistenceFileStream
                         menu.UpdateRecord(highScoreClassList);
                         break;
                     case '5':
-                        menu.ClearAllRecords();
+                        menu.ClearAllRecords(highScoreClassList);
                         break;
                     case '6':
                         Exit();
