@@ -157,7 +157,7 @@ namespace ProkesHoltrey_PersistenceFileStream
                         //usingMenu = false;
                         break;
                     case '4':
-                        menu.UpdateRecord();
+                        menu.UpdateRecord(highScoreClassList);
                         break;
                     case '5':
                         menu.ClearAllRecords();

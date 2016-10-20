@@ -61,9 +61,41 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
 
         }
 
-        public void UpdateRecord()
+        public void UpdateRecord(List<HighScore> highScoreClassList)
         {
-
+            string userEntry = "";
+            string playerName = "";
+            int score = 0;
+            int previousScore = 0;
+            Console.Clear();
+            Console.WriteLine("Update Current Record");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Player Name: ");
+            userEntry = Console.ReadLine();
+            playerName = userEntry;
+            foreach (HighScore player in highScoreClassList)
+            {
+                if (player.PlayerName == playerName)
+                {
+                    previousScore = player.PlayerScore;
+                }
+            }
+            bool convert = false;
+            while (!convert)
+            {
+                Console.WriteLine("Preivous High Score: " + previousScore);
+                Console.Write("New High Score: ");
+                userEntry = Console.ReadLine();
+                convert = Int32.TryParse(userEntry, out score);
+                foreach (HighScore player in highScoreClassList)
+                {
+                    if (player.PlayerName == playerName)
+                    {
+                        player.PlayerScore = score;
+                    }
+                }
+            }
         }
 
         public void ClearAllRecords()
