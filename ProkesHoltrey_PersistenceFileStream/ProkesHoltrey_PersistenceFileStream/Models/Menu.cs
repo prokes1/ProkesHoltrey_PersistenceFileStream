@@ -41,11 +41,11 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
                 {
                     foreach (HighScore player in highScoreClassList)
                     {
-                        if (userEntry == player.PlayerName)
+                        if (player.PlayerName.Contains(userEntry))
                         {
-                            convert = false;
                             Console.WriteLine("Name already taken. Please choose another name.");
-                            continue;
+                            convert = false;
+                            break;
                         }
                         else
                         {
@@ -124,7 +124,7 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             Console.WriteLine("Update Current Record");
             Console.WriteLine();
             Console.WriteLine();
-            
+
 
             if (highScoreClassList.Count == 0)
             {
@@ -150,16 +150,16 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
                             Console.WriteLine("Invalid reponse. Please answer 'y' or 'n'.");
                             loop = true;
                         }
-                    }   
+                    }
                 }
-                
+
             }
             else
             {
                 Console.Write("Player Name: ");
                 userEntry = Console.ReadLine();
                 playerName = userEntry;
-                
+
                 foreach (HighScore player in highScoreClassList)
                 {
                     if (player.PlayerName == playerName)
@@ -186,7 +186,7 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
                 }
                 DisplayContinuePrompt();
             }
-            
+
         }
 
         public void ClearAllRecords(List<HighScore> highScoreClassList)
