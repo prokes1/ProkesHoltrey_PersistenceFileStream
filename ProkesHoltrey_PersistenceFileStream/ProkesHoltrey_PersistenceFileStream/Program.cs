@@ -20,6 +20,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             string textFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
             string file = textFilePath + @"\Data\HighScore.txt";
+            ReadHighScoresFromTextFile(file, highScoreClassListWrite);
             DisplayIntroMenu(highScoreClassListWrite);
             ObjectListReadWrite(file, highScoreClassListWrite);
 
@@ -54,7 +55,7 @@ namespace ProkesHoltrey_PersistenceFileStream
 
 
             // build the list of HighScore class objects from the list of strings
-            highScoresClassListRead = ReadHighScoresFromTextFile(dataFile);
+            highScoresClassListRead = ReadHighScoresFromTextFile(dataFile, highScoresClassListWrite);
 
             // display list of high scores objects
            menu.DisplayHighScores(highScoresClassListRead);
@@ -77,13 +78,13 @@ namespace ProkesHoltrey_PersistenceFileStream
             File.WriteAllLines(dataFile, highScoresStringListWrite);
         }
 
-        static List<HighScore> ReadHighScoresFromTextFile(string dataFile)
+        static List<HighScore> ReadHighScoresFromTextFile(string dataFile, List<HighScore> highScoresClassList)
         {
             const char delineator = ',';
 
             List<string> highScoresStringList = new List<string>();
 
-            List<HighScore> highScoresClassList = new List<HighScore>();
+            
 
             // read each line and put it into an array and convert the array to a list
             highScoresStringList = File.ReadAllLines(dataFile).ToList();
