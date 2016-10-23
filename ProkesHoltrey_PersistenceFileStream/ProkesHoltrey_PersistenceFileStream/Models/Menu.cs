@@ -118,7 +118,6 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             string playerName = "";
             int score = 0;
             int previousScore = 0;
-            bool recordExists;
             bool noRecords = true;
             bool loop = true;
             Console.Clear();

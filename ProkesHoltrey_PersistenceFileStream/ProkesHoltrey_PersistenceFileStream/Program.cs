@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using ProkesHoltrey_PersistenceFileStream.Models;
 using ProkesHoltrey_PersistenceFileStream;
 
@@ -23,9 +24,6 @@ namespace ProkesHoltrey_PersistenceFileStream
             ReadHighScoresFromTextFile(file, highScoreClassListWrite);
             DisplayIntroMenu(highScoreClassListWrite);
             ObjectListReadWrite(file, highScoreClassListWrite);
-
-            Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
         }
 
         static void ObjectListReadWrite(string dataFile, List<HighScore> highScoreClassListWrite)
@@ -35,30 +33,27 @@ namespace ProkesHoltrey_PersistenceFileStream
             List<string> highScoresStringListRead = new List<string>(); ;
             List<HighScore> highScoresClassListRead = new List<HighScore>(); ;
 
-            // initialize a list of HighScore objects
-           
-
             Console.WriteLine("The following high scores will be added to HighScore.txt.\n");
             // display list of high scores objects
+            Console.WriteLine("Send to file: ");
             menu.DisplayHighScores(highScoreClassListWrite);
-            
-            Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
-            Console.ReadKey();
-
             // build the list of strings and write to the text file line by line
             WriteHighScoresToTextFile(highScoreClassListWrite, dataFile);
-
+            Console.Clear();
+            
+            for (int i = 0; i <= 100; i+=5)
+            {
+                Console.Clear();
+                Console.WriteLine("Loading... " + i + "% completed.");
+                Thread.Sleep(30);
+            }
             Console.WriteLine("High scores added successfully.\n");
+            
+                highScoresClassListRead = ReadHighScoresFromTextFile(dataFile, highScoresClassListWrite);
 
-            Console.WriteLine("Read into a string of HighScore and display the high scores from data file. Press any key to continue.\n");
-            Console.ReadKey();
-
-
-            // build the list of HighScore class objects from the list of strings
-            highScoresClassListRead = ReadHighScoresFromTextFile(dataFile, highScoresClassListWrite);
-
-            // display list of high scores objects
-           menu.DisplayHighScores(highScoresClassListRead);
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadLine();
+            menu.DisplayHighScores(highScoresClassListRead);
         }
         
 
@@ -120,7 +115,7 @@ namespace ProkesHoltrey_PersistenceFileStream
                 Console.WriteLine();
                 Console.WriteLine("5. Clear all Records");
                 Console.WriteLine();
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. Exit/Send to file");
 
                 ConsoleKeyInfo userResponse = Console.ReadKey(true);
                 switch (userResponse.KeyChar)
@@ -144,7 +139,7 @@ namespace ProkesHoltrey_PersistenceFileStream
                         menu.ClearAllRecords(highScoreClassList);
                         break;
                     case '6':
-                        Exit();
+                        usingMenu = false;
                         break;
                     default:
                         Console.WriteLine("It appears you have selected an incorrect choice.");
@@ -154,22 +149,13 @@ namespace ProkesHoltrey_PersistenceFileStream
                         userResponse = Console.ReadKey(true);
                         if (userResponse.Key == ConsoleKey.Escape)
                         {
-                            usingMenu = false;
+                            Console.WriteLine("Exiting Application. Press any key to continue.");
+                            Console.ReadKey();
+                            Environment.Exit(1);
                         }
                         break;
                 }
             }
-        }
-
-        
-
-        static void Exit()
-        {
-            Console.Clear();
-            Console.WriteLine("Dude, why you leaving?");
-            Console.WriteLine("I guess you can press any key to leave.");
-            Console.ReadKey();
-            Environment.Exit(1);
         }
     }
 }
