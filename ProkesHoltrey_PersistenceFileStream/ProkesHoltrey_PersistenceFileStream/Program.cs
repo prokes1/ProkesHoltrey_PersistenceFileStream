@@ -35,7 +35,7 @@ namespace ProkesHoltrey_PersistenceFileStream
             List<HighScore> highScoresClassListRead = new List<HighScore>(); ;
 
             // initialize a list of HighScore objects
-            highScoresClassListWrite = InitializeListOfHighScores();
+           
 
             Console.WriteLine("The following high scores will be added to HighScores.txt.\n");
             // display list of high scores objects
@@ -59,26 +59,6 @@ namespace ProkesHoltrey_PersistenceFileStream
             // display list of high scores objects
            menu.DisplayHighScores(highScoresClassListRead);
         }
-
-        static List<HighScore> InitializeListOfHighScores()
-        {
-            List<HighScore> highScoresClassList = new List<HighScore>();
-
-            // initialize the IList of high scores - note: no instantiation for an interface
-            highScoresClassList.Add(new HighScore() { PlayerName = "John", PlayerScore = 1296 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Joan", PlayerScore = 345 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Jeff", PlayerScore = 867 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Joe", PlayerScore = 2309 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Jazz", PlayerScore = 239 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Reggie", PlayerScore = 2130 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Red", PlayerScore = 1209 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Charles", PlayerScore = 309 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Val", PlayerScore = 3289 });
-            highScoresClassList.Add(new HighScore() { PlayerName = "Billy", PlayerScore = 909 });
-
-            return highScoresClassList;
-        }
-
         
 
         static void WriteHighScoresToTextFile(List<HighScore> highScoreClassLIst, string dataFile)
@@ -173,7 +153,7 @@ namespace ProkesHoltrey_PersistenceFileStream
                         userResponse = Console.ReadKey(true);
                         if (userResponse.Key == ConsoleKey.Escape)
                         {
-                            usingMenu = false;
+                            Environment.Exit(1);
                         }
                         break;
                 }

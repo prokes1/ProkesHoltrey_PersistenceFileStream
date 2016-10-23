@@ -28,20 +28,50 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             string userEntry = "";
             string playerName = "";
             int score = 0;
+            bool convert = false;
             Console.Clear();
             Console.WriteLine("Add Record");
             Console.WriteLine();
-            Console.WriteLine();
-            Console.Write("Player Name: ");
-            userEntry = Console.ReadLine();
-            playerName = userEntry;
-            bool convert = false;
+
+            while (!convert)
+            {
+                Console.Write("Player Name: ");
+                userEntry = Console.ReadLine();
+                if (highScoreClassList.Count > 0)
+                {
+                    foreach (HighScore player in highScoreClassList)
+                    {
+                        if (userEntry == player.PlayerName)
+                        {
+                            convert = false;
+                            Console.WriteLine("Name already taken. Please choose another name.");
+                            continue;
+                        }
+                        else
+                        {
+                            convert = true;
+                            playerName = userEntry;
+                        }
+                    }
+                }
+                else
+                {
+                    playerName = userEntry;
+                    convert = true;
+                }
+            }
+            convert = false;
+
             while (!convert)
             {
                 Console.WriteLine();
                 Console.Write("Score: ");
                 userEntry = Console.ReadLine();
                 convert = Int32.TryParse(userEntry, out score);
+                if (convert == false)
+                {
+                    Console.WriteLine("Score invalid. Please use an integer.");
+                }
             }
             tempScore = new HighScore() { PlayerName = playerName, PlayerScore = score };
             highScoreClassList.Add(tempScore);
@@ -70,7 +100,10 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             Console.Clear();
             Console.WriteLine("Records");
             Console.WriteLine();
-
+            if (highScoreClassList.Count == 0)
+            {
+                Console.WriteLine("No records found.");
+            }
             foreach (HighScore player in highScoreClassList)
             {
                 Console.WriteLine("Player: {0}\tScore: {1}", player.PlayerName, player.PlayerScore);
@@ -85,39 +118,76 @@ namespace ProkesHoltrey_PersistenceFileStream.Models
             string playerName = "";
             int score = 0;
             int previousScore = 0;
+            bool recordExists;
+            bool noRecords = true;
+            bool loop = true;
             Console.Clear();
             Console.WriteLine("Update Current Record");
             Console.WriteLine();
             Console.WriteLine();
-            Console.Write("Player Name: ");
-            userEntry = Console.ReadLine();
-            playerName = userEntry;
-            foreach (HighScore player in highScoreClassList)
+            
+
+            if (highScoreClassList.Count == 0)
             {
-                if (player.PlayerName == playerName)
+                noRecords = true;
+                if (noRecords)
                 {
-                    previousScore = player.PlayerScore;
+                    Console.WriteLine("There are no records available.");
+                    Console.WriteLine("Would you like to add a record?(y/n)");
+                    userEntry = Console.ReadLine().ToUpper();
+                    while (loop)
+                    {
+                        if (userEntry == "Y" || userEntry == "YES")
+                        {
+                            AddRecord(highScoreClassList);
+                            loop = false;
+                        }
+                        else if (userEntry == "N" || userEntry == "NO")
+                        {
+                            loop = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid reponse. Please answer 'y' or 'n'.");
+                            loop = true;
+                        }
+                    }   
                 }
+                
             }
-            bool convert = false;
-            while (!convert)
+            else
             {
-                Console.WriteLine();
-                Console.WriteLine("Previous High Score: " + previousScore);
-                Console.WriteLine();
-                Console.Write("New High Score: ");
+                Console.Write("Player Name: ");
                 userEntry = Console.ReadLine();
-                convert = Int32.TryParse(userEntry, out score);
+                playerName = userEntry;
+                
                 foreach (HighScore player in highScoreClassList)
                 {
                     if (player.PlayerName == playerName)
                     {
-                        player.PlayerScore = score;
+                        previousScore = player.PlayerScore;
                     }
                 }
+                bool convert = false;
+                while (!convert)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Previous High Score: " + previousScore);
+                    Console.WriteLine();
+                    Console.Write("New High Score: ");
+                    userEntry = Console.ReadLine();
+                    convert = Int32.TryParse(userEntry, out score);
+                    foreach (HighScore player in highScoreClassList)
+                    {
+                        if (player.PlayerName == playerName)
+                        {
+                            player.PlayerScore = score;
+                        }
+                    }
+                }
+                DisplayContinuePrompt();
             }
-
-            DisplayContinuePrompt();
+            
         }
 
         public void ClearAllRecords(List<HighScore> highScoreClassList)
