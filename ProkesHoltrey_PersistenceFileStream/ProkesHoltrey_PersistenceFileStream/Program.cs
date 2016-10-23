@@ -17,17 +17,17 @@ namespace ProkesHoltrey_PersistenceFileStream
             List<HighScore> highScoreClassListWrite = new List<HighScore>();
             
             //string textFilePath = "Data\\Data.txt";
-            string textFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string textFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-            string file = textFilePath + @"\Data\HighScores.txt";
+            string file = textFilePath + @"\Data\HighScore.txt";
             DisplayIntroMenu(highScoreClassListWrite);
-            ObjectListReadWrite(file);
+            ObjectListReadWrite(file, highScoreClassListWrite);
 
             Console.WriteLine("\nPress any key to exit.");
             Console.ReadKey();
         }
 
-        static void ObjectListReadWrite(string dataFile)
+        static void ObjectListReadWrite(string dataFile, List<HighScore> highScoreClassListWrite)
         {
             List<HighScore> highScoresClassListWrite = new List<HighScore>();
 
@@ -37,15 +37,15 @@ namespace ProkesHoltrey_PersistenceFileStream
             // initialize a list of HighScore objects
            
 
-            Console.WriteLine("The following high scores will be added to HighScores.txt.\n");
+            Console.WriteLine("The following high scores will be added to HighScore.txt.\n");
             // display list of high scores objects
-            menu.DisplayHighScores(highScoresClassListWrite);
+            menu.DisplayHighScores(highScoreClassListWrite);
             
             Console.WriteLine("\nAdd high scores to text file. Press any key to continue.\n");
             Console.ReadKey();
 
             // build the list of strings and write to the text file line by line
-            WriteHighScoresToTextFile(highScoresClassListWrite, dataFile);
+            WriteHighScoresToTextFile(highScoreClassListWrite, dataFile);
 
             Console.WriteLine("High scores added successfully.\n");
 
@@ -153,7 +153,7 @@ namespace ProkesHoltrey_PersistenceFileStream
                         userResponse = Console.ReadKey(true);
                         if (userResponse.Key == ConsoleKey.Escape)
                         {
-                            Environment.Exit(1);
+                            usingMenu = false;
                         }
                         break;
                 }
